@@ -175,8 +175,8 @@ class Client extends EventEmitter {
     }
     this.log.info(`MonitoRSS has logged in as "${bot.user.username}" (ID ${bot.user.id})`)
     ipc.send(ipc.TYPES.SHARD_READY, {
-      guildIds: bot.guilds.cache.keyArray(),
-      channelIds: bot.channels.cache.keyArray()
+      guildIds: bot.guilds.cache.keys(),
+      channelIds: bot.channels.cache.keys()
     })
   }
 
@@ -190,7 +190,7 @@ class Client extends EventEmitter {
   }
 
   listenToShardedEvents (bot) {
-    process.on('message', async message => {
+    process.on('messageCreate', async message => {
       if (!ipc.isValid(message)) {
         return
       }
@@ -205,11 +205,11 @@ class Client extends EventEmitter {
               const config = getConfig()
               bot.user.setPresence({
                 status: config.bot.status,
-                activity: {
+                activities: [{
                   name: config.bot.activityName,
                   type: config.bot.activityType,
                   url: config.bot.streamActivityURL || undefined
-                }
+                }]
               }).catch(err => this.log.warn({
                 error: err
               }, 'Failed to set presence'))

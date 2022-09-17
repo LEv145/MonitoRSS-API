@@ -187,7 +187,7 @@ async function connectToDatabase (config) {
   await initialize.setupModels(connection)
 }
 
-process.on('message', async m => {
+process.on('messageCreate', async m => {
   const currentBatch = m.currentBatch
   const { debugURLs, scheduleName, memoryCollections, config } = m
   const logMarker = scheduleName

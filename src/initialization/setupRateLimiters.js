@@ -6,7 +6,7 @@ const Guild = require('../structs/Guild.js')
  * @param {import('discord.js').Client} bot
  */
 async function setupRateLimiters (bot) {
-  const guilds = bot.guilds.cache.keyArray()
+  const guilds = bot.guilds.cache.keys()
   const feeds = await Feed.getManyByQuery({
     guild: {
       $in: guilds

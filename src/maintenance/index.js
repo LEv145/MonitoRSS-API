@@ -39,7 +39,7 @@ async function prunePreInit (guildIdsByShard, channelIdsByShard) {
  */
 async function pruneWithBot (bot, restProducer) {
   const log = createLogger(bot.shard.ids[0])
-  const guilds = bot.guilds.cache.keyArray()
+  const guilds = bot.guilds.cache.keys()
   log.debug('Pruning with bot. Fetching feeds')
   const feeds = await Feed.getManyByQuery({
     guild: {

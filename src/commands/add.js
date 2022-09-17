@@ -84,7 +84,7 @@ module.exports = async (message) => {
         channel: message.channel.id,
         guild: message.guild.id
       })
-      await newFeed.testAndSave(message.guild.shardID)
+      await newFeed.testAndSave(message.guild.shardId)
       log.info({
         guild: message.guild
       }, `Added ${link}`)

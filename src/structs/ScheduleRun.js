@@ -513,7 +513,7 @@ class ScheduleRun extends EventEmitter {
       }
     }
     const handler = this.createMessageHandler(batches, batchIndex, debugFeedURLs, onAllConnected, onComplete)
-    processor.on('message', handler.bind(this))
+    processor.on('messageCreate', handler.bind(this))
     processor.send({
       config: getConfig(),
       currentBatch: thisBatch,

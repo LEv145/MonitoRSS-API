@@ -1,1 +1,1 @@
-module.exports = (message) => message.channel.send(message.guild.shardID)
+module.exports = (message) => message.channel.send(message.guild.shardId)

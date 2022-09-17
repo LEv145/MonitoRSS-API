@@ -7,7 +7,7 @@ module.exports = async (message) => {
   const config = getConfig()
 
   const illegals = []
-  const guildIds = message.client.guilds.cache.keyArray()
+  const guildIds = message.client.guilds.cache.keys()
   const promises = []
   for (const id of guildIds) {
     promises.push(Feed.getBy('guild', id))

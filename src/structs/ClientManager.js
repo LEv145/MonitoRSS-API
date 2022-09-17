@@ -52,7 +52,7 @@ class ClientManager extends EventEmitter {
       token: this.config.bot.token
     })
     this.shardingManager.on('shardCreate', shard => {
-      shard.on('message', message => this.messageHandler(shard, message))
+      shard.on('messageCreate', message => this.messageHandler(shard, message))
       shard.on('death', () => {
         this.log.info('Detected shard exit, sending kill signal')
         this.kill()

@@ -3,14 +3,14 @@ const getConfig = require('../../config.js').get
 const createLogger = require('../../util/logger/create.js')
 const schema = Joi.object({
   status: Joi.string().valid('online', 'idle', 'invisible', 'dnd'),
-  activity: Joi.object({
+  activities: [Joi.object({
     name: Joi.string(),
     type: Joi.string().valid('PLAYING', 'STREAMING', 'LISTENING', 'WATCHING', 'CUSTOM_STATUS'),
     url: Joi.string().when('type', {
       is: 'STREAMING',
       then: Joi.string().required()
     })
-  })
+  })]
 })
 
 function getPresenceFromArgs (args) {
@@ -23,14 +23,14 @@ function getPresenceFromArgs (args) {
     presenceData.status = status
   }
   if (activityType) {
-    presenceData.activity = {
+    presenceData.activities = [{
       type: activityType
-    }
+    }]
     if (activityName) {
-      presenceData.activity.name = activityName
+      presenceData.activities[0].name = activityName
     }
     if (activityURL) {
-      presenceData.activity.url = activityURL
+      presenceData.activities[0].url = activityURL
     }
   }
   return presenceData
