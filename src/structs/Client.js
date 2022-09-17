@@ -31,13 +31,11 @@ const CLIENT_OPTIONS = {
    * paginated embed, the pagination will stop working
    */
   messageCacheMaxSize: 10,
-  ws: {
-    intents: [
-      'GUILDS',
-      'GUILD_MESSAGES',
-      'GUILD_MESSAGE_REACTIONS'
-    ]
-  }
+  intents: [
+    'GUILDS',
+    'GUILD_MESSAGES',
+    'GUILD_MESSAGE_REACTIONS'
+  ]
 }
 
 class Client extends EventEmitter {
