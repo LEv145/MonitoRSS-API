@@ -52,6 +52,11 @@ class ArticleMessage {
    */
   getChannel (bot) {
     const channel = bot.channels.cache.get(this.feed.channel)
+    
+    if (!channel) {
+      return bot.threads.cache.get(this.feed.channel)
+    }
+    
     return channel
   }
 
