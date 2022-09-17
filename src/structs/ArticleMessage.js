@@ -52,11 +52,6 @@ class ArticleMessage {
    */
   getChannel (bot) {
     const channel = bot.channels.cache.get(this.feed.channel)
-
-    if (!channel) {
-      return bot.threads.cache.get(this.feed.channel)
-    }
-
     return channel
   }
 
@@ -289,9 +284,7 @@ class ArticleMessage {
     } else {
       options.embed = embeds[0]
     }
-    if (this.feed.split && this.feed.split.enabled) {
-      options.split = this.feed.split
-    }
+    options.split = this.feed.split
     return options
   }
 

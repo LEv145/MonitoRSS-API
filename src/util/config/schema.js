@@ -14,7 +14,6 @@ const logSchema = Joi.object({
 })
 
 const botSchema = Joi.object({
-  clientId: Joi.string().strict().default(''),
   token: Joi.string().strict().default(''),
   locale: localeValidator.config().locale(),
   enableCommands: Joi.bool().strict().default(true),
@@ -87,8 +86,11 @@ const pledgeApiSchema = Joi.object({
 
 const discordHttpGateway = Joi.object({
   enabled: Joi.bool().strict().default(false),
-  redisUri: Joi.string().strict().allow('').default(''),
-  rabbitmqUri: Joi.string().strict().allow('').default('')
+  redisUri: Joi.string().strict().allow('').default('').when('enabled', {
+    is: Joi.bool().valid(true).required(),
+    then: Joi.string().strict().required().disallow(''),
+    otherwise: Joi.string().strict().allow('').default('')
+  })
 })
 
 const apisSchema = Joi.object({
